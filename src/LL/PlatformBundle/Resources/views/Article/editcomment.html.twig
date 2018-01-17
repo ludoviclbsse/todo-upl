@@ -1,0 +1,25 @@
+{% extends "LLPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Modifier un commentaire
+{% endblock %}
+
+{% block body %}
+
+    <h2>Modifier un commentaire</h2>
+
+    {{ include("LLPlatformBundle:Article:form.html.twig") }}
+
+    <p>
+        Vous éditez un commentaire déjà existant, merci de ne pas changer
+        l'esprit général du commentaire déjà publié.
+    </p>
+
+    <p>
+        <a href="{{ path('ll_platform_view', {'id': comment.id}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour au commentaire
+        </a>
+    </p>
+
+{% endblock %}

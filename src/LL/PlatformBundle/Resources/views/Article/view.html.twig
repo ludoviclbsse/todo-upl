@@ -1,0 +1,113 @@
+{% extends "LLPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+
+{% block llplatform_body %}
+
+    <div style="float: left; margin-right: 1em;">
+        {# On vérifie qu'une image soit bien associée à l'article #}
+        {% if article.image is not null %}
+            <img
+                    src="{{ asset(article.image.webPath) }}"
+                    alt="{{ article.image.alt }}"
+                    height="60"
+            />
+        {% endif %}
+    </div>
+
+      {#  <img src="{{ article.image.url }}" alt="{{ article.image.alt }}"> #}
+
+    <h2>{{ article.title }}</h2>
+    <h5><span class="glyphicon glyphicon-time"></span> Post by {{ article.author }}, {{ article.date|date('d/m/Y') }}.
+    {% if is_granted('ROLE_AUTEUR') %}
+        {% if article.author == app.user.username %}
+            <li class="dropdown">
+                <span class="glyphicon glyphicon-menu-down"></span>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li>
+                        <a href="{{ path('ll_platform_edit', {'id': article.id}) }}">
+                            <i class="glyphicon glyphicon-edit"></i>
+                            Modifier l'article
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('ll_platform_delete', {'id': article.id}) }}">
+                            <i class="glyphicon glyphicon-trash"></i>
+                            Supprimer l'article
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        {% endif %}
+    {% endif %}
+    </h5>
+
+    {% if not article.categories.empty %}
+        <h5><p>
+            {% for category in article.categories %}
+                <span class="label label-success">{{ category.name }}</span>
+            {% endfor %}
+        </p></h5>
+    {% endif %}
+
+    <p>{{ article.content | raw }}</p>
+    <hr>
+
+    <p>
+        <a href="{{ path('ll_platform_home') }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour à la liste
+        </a>
+
+        {% if is_granted('ROLE_AUTEUR') %}
+            <h4>Leave a Comment:</h4>
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        {% endif %}
+    </p>
+
+
+
+    <p><span class="badge">{{ article.nbComments }}</span> Comments:</p><br>
+
+
+    <p style="float: left; margin-right: 1em;">
+        {% if article.nbComments != 0 %}
+            {% for comment in listComments %}
+                <div>
+                    <h4>{{ comment.author }} <small>{{ comment.date|date('d/m/Y') }}
+                        {% if is_granted('ROLE_AUTEUR') %}
+                            {% if comment.author == app.user.username %}
+                                <li class="dropdown">
+                                    <span class="glyphicon glyphicon-menu-down"></span>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li>
+                                            <a href="{{ path('ll_platform_editcomment', {'id': comment.id}) }}">
+                                                <i class="glyphicon glyphicon-edit"></i>
+                                                Modifier le commentaire
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('ll_platform_deletecomment', {'id': comment.id}) }}">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                                Supprimer Commentaire
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                        </small>
+                    </h4>
+                    <p>{{ comment.content | raw}}</p>
+                <br>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </p>
+
+{% endblock %}

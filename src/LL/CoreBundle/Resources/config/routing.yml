@@ -1,0 +1,9 @@
+ll_core_home:
+    path: /
+    defaults:
+        _controller: LLCoreBundle:Core:index
+
+ll_core_contact:
+    path: /contact
+    defaults:
+        _controller: LLCoreBundle:Core:contact

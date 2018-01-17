@@ -1,0 +1,20 @@
+services:
+    ll_platform.antispam:
+      class: LL\PlatformBundle\Antispam\Antispam
+      arguments:
+        - "@mailer"
+        - 50
+      calls:
+        - [ setLocale, [%locale%]]
+
+    ll_platform.twig.antispam_extention:
+      class:  LL\PlatformBundle\Twig\AntispamExtention
+      arguments:
+        - "@ll_platform.antispam"
+      tags:
+        - { name: twig.extention }
+
+    ll_platform.form.ckeditor:
+      class:  LL\PlatformBundle\Form\CkeditorType
+      tags:
+        - { name: form.type, alias: ckeditor }

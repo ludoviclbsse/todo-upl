@@ -1,0 +1,4 @@
+services:
+#    ll_user.example:
+#        class: LL\UserBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

@@ -1,0 +1,21 @@
+{% extends "LLCoreBundle::layout.html.twig" %}
+
+{% block title %}
+    Page d'accueil - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <h2>Page d'accueil</h2>
+
+    {# On affiche tous les messages flash dont le nom est « info » #}
+    {% for message in app.session.flashbag.get('info') %}
+        <div class="alert alert-info">Message flash : {{ message }}</div>
+    {% endfor %}
+
+    {# Pour afficher les derniers articles, on réutilise le contrôleur menu du PlatformBundle #}
+    <h3>Derniers articles</h3>
+    {{ render(controller("LLPlatformBundle:Article:menu", {'limit': 3})) }}
+    </p>
+
+{% endblock %}

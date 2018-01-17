@@ -1,0 +1,25 @@
+{% extends "LLPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Modifier un article - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <h2>Modifier un article</h2>
+
+    {{ include("LLPlatformBundle:Article:form.html.twig") }}
+
+    <p>
+        Vous éditez un article déjà existante, merci de ne pas changer
+        l'esprit général de l'article déjà publié.
+    </p>
+
+    <p>
+        <a href="{{ path('ll_platform_view', {'id': article.id}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour à l'article
+        </a>
+    </p>
+
+{% endblock %}

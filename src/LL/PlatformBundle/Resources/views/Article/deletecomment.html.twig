@@ -1,0 +1,26 @@
+{% extends "LLPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Supprimer un commentaire
+{% endblock %}
+
+{% block llplatform_body %}
+
+    <h2>Suppression de commentaire</h2>
+
+    <p>
+        Etes-vous certain de vouloir supprimer ce commentaire ?
+    </p>
+
+    <form action="{{ path('ll_platform_deletecomment', {'id': comment.id}) }}" method="post">
+        <a href="{{ path('ll_platform_view', {'id': article.id}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour à l'article
+        </a>
+        {# Ici j'ai écrit le bouton de soumission à la main #}
+        <input type="submit" value="Supprimer" class="btn btn-danger" />
+        {# Ceci va générer le champ CSRF #}
+        {{ form_rest(form) }}
+    </form>
+
+{% endblock %}

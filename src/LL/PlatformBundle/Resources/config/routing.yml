@@ -1,0 +1,55 @@
+ll_platform_home:
+    path:      /{page}
+    defaults:
+        _controller: LLPlatformBundle:Article:index
+        page:        1
+    requirements:
+        page: \d+
+    
+ll_platform_view:
+    path:      /article/{id}
+    defaults:
+        _controller: LLPlatformBundle:Article:view
+    requirements:
+        id: \d+
+
+ll_platform_add:
+    path:      /add
+    defaults:
+        _controller: LLPlatformBundle:Article:add
+
+ll_platform_addcomment:
+    path:      /article/{id}/addcomment
+    defaults:
+        _controller: LLPlatformBundle:Article:addComment
+    requirements:
+        id: \d+
+
+ll_platform_edit:
+    path:      /edit/{id}
+    defaults:
+        _controller: LLPlatformBundle:Article:edit
+    requirements:
+        id: \d+
+
+ll_platform_editcomment:
+    path:      /editcomment/{id}
+    defaults:
+        _controller: LLPlatformBundle:Article:editComment
+    requirements:
+        id: \d+
+
+ll_platform_delete:
+    path:      /delete/{id}
+    defaults:
+        _controller: LLPlatformBundle:Article:delete
+    requirements:
+        id: \d+
+
+ll_platform_deletecomment:
+    path:      /deletecomment/{id}
+    defaults:
+        _controller: LLPlatformBundle:Article:deleteComment
+    requirements:
+        id: \d+
+
